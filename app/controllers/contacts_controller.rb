@@ -81,9 +81,9 @@ class ContactsController < ApplicationController
       event = {
         name: "contact_log",
         data: {
-          id: @contact.id
-          nome: @contact.name
-          email: @contact.mail
+          id: @contact.id,
+          nome: @contact.name,
+          email: @contact.email,
           sysdate: Time.now
         }
       }
