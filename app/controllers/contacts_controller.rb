@@ -77,6 +77,22 @@ class ContactsController < ApplicationController
 
     def kafka_message
       message = @contact.destroyed? ? @contact.as_json.merge({destroyed: true}).to_json : @contact.as_json.to_json
-      DeliveryBoy.deliver(message, topic: 'contacts_message')
+
+      event = {
+        name: "contact_log",
+        data: {
+          id: @contact.id
+          nome: @contact.name
+          email: @contact.mail
+          sysdate: Time.now
+        }
+      }
+
+      # Queue messages, before sending
+      DeliveryBoy.produce(message, topic: 'contacts_message')
+      DeliveryBoy.produce(event, topic: 'logs')
+
+      # Deliver queued messages
+      DeliveryBoy.deliver_messages
     end
 end
