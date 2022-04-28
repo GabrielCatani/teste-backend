@@ -58,6 +58,10 @@ gem "bootsnap", require: false
 # Add turbolinks gem
 gem "turbolinks"
 
+# Gem for mongoDB NoSQL
+gem "mongoid"
+gem "webpacker"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
