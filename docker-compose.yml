@@ -51,6 +51,13 @@ services:
     ports:
       - 3000:3000
 
+  mongodb:
+    image: mongo:5.0.7
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/apps/mongo:/data/db
+
 networks:
   broker-kafka:
     driver: bridge
