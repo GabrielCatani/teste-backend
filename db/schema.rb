@@ -13,6 +13,7 @@
 ActiveRecord::Schema[7.0].define(version: 2022_04_27_130634) do
   create_table "contacts", force: :cascade do |t|
     t.string "name"
+    t.integer "cpf_cnpj"
     t.string "birthday"
     t.string "email"
     t.string "mobile"
@@ -21,7 +22,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_27_130634) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "cpf/cnpj"
   end
 
 end

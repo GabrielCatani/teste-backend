@@ -30,6 +30,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
 
+    @contact.update_attribute(:cpf_cnpj, contact_params[:cpf_cnpj].to_i)
     respond_to do |format|
       if @contact.save
         format.html { redirect_to contact_url(@contact), notice: "Contact was successfully created." }
@@ -72,7 +73,7 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:name, :birthday, :email, :mobile, :message, :advertising, :active)
+      params.require(:contact).permit(:name, :cpf_cnpj, :birthday, :email, :mobile, :message, :advertising, :active)
     end
 
     def kafka_message
@@ -89,10 +90,10 @@ class ContactsController < ApplicationController
       }
 
       # Queue messages, before sending
-      DeliveryBoy.produce(message, topic: 'contacts_message')
-      DeliveryBoy.produce(event, topic: 'logs')
+      #DeliveryBoy.produce(message, topic: 'contacts_message')
+      #DeliveryBoy.produce(event, topic: 'logs')
 
       # Deliver queued messages
-      DeliveryBoy.deliver_messages
+      #DeliveryBoy.deliver_messages
     end
 end

@@ -8,7 +8,6 @@ class CreateContacts < ActiveRecord::Migration[7.0]
       t.text :message
       t.boolean :advertising
       t.boolean :active
-
       t.timestamps
     end
   end
